@@ -5,16 +5,23 @@ import subprocess
 import streamlit as st
 import textwrap
 
-# Force Python to use the correct site-packages directory
+# Ensure correct Python path
 sys.path.append(site.getsitepackages()[0])
 sys.path.append(os.path.expanduser("~/.local/lib/python3.9/site-packages"))
+
+# Ensure pip is installed
+try:
+    subprocess.run(["python3.9", "-m", "ensurepip"], check=True)
+    subprocess.run(["python3.9", "-m", "pip", "install", "--upgrade", "pip"], check=True)
+except Exception as e:
+    st.error(f"Error ensuring pip is installed: {e}")
 
 # Try importing groq, install if missing
 try:
     from groq import Groq
 except ModuleNotFoundError:
     with st.spinner("Installing missing dependencies for Python 3.9..."):
-        subprocess.call(["/usr/bin/python3.9", "-m", "pip", "install", "--user", "groq"])
+        subprocess.run(["python3.9", "-m", "pip", "install", "--user", "groq"], check=True)
     sys.path.append(os.path.expanduser("~/.local/lib/python3.9/site-packages"))
     from groq import Groq  # Try importing again
 
