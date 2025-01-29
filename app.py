@@ -1,15 +1,15 @@
+import os
 import sys
 import site
-import os
 import subprocess
 import streamlit as st
 import textwrap
 
-# Ensure the correct Python path is used
+# Force Python to use the correct site-packages directory
 sys.path.append(site.getsitepackages()[0])
 sys.path.append(os.path.expanduser("~/.local/lib/python3.9/site-packages"))
 
-# Try to import groq, install if missing
+# Try importing groq, manually installing if needed
 try:
     from groq import Groq
 except ModuleNotFoundError:
