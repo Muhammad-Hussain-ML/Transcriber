@@ -1,14 +1,20 @@
+import sys
+import site
 import os
 import subprocess
 import streamlit as st
 import textwrap
+
+# Ensure the correct Python path is used
+sys.path.append(site.getsitepackages()[0])
 
 # Try to import groq, install if missing
 try:
     import groq
 except ModuleNotFoundError:
     with st.spinner("Installing missing dependencies..."):
-        subprocess.call(["pip", "install", "groq"])
+        subprocess.call(["pip", "install", "--user", "groq"])
+    sys.path.append(os.path.expanduser("~/.local/lib/python3.12/site-packages"))
     import groq
 
 # Streamlit App Title
@@ -19,7 +25,7 @@ st.write("Upload an audio file, and the app will transcribe it.")
 # Load API Key from Streamlit Secrets
 try:
     GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
-    client = Groq(api_key=GROQ_API_KEY)
+    client = groq.Groq(api_key=GROQ_API_KEY)
 except KeyError:
     st.error("API key is missing! Please add 'GROQ_API_KEY' to Streamlit Secrets.")
 
