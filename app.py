@@ -10,12 +10,12 @@ sys.path.append(site.getsitepackages()[0])
 
 # Try to import groq, install if missing
 try:
-    import groq
+    from groq import Groq
 except ModuleNotFoundError:
     with st.spinner("Installing missing dependencies..."):
         subprocess.call(["pip", "install", "--user", "groq"])
     sys.path.append(os.path.expanduser("~/.local/lib/python3.12/site-packages"))
-    import groq
+    from groq import Groq
 
 # Streamlit App Title
 st.title("Audio Transcription with Groq")
