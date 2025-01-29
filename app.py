@@ -28,7 +28,7 @@ except ModuleNotFoundError:
 # Streamlit App Title
 st.title("Audio Transcription with Groq")
 
-st.write(f"Python version: {sys.version}")  # Display Python version for debugging
+# st.write(f"Python version: {sys.version}")  # Display Python version for debugging
 
 # Load API Key from Streamlit Secrets
 try:
