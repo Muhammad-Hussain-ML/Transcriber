@@ -1,2 +1,2 @@
-textwrap
-Grog=0.15.0
+streamlit
+groq==0.15.0
