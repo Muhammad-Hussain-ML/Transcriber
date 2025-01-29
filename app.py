@@ -1,6 +1,15 @@
+import os
+import subprocess
 import streamlit as st
 import textwrap
-from groq import Groq
+
+# Try to import groq, install if missing
+try:
+    import groq
+except ModuleNotFoundError:
+    with st.spinner("Installing missing dependencies..."):
+        subprocess.call(["pip", "install", "groq"])
+    import groq
 
 # Streamlit App Title
 st.title("Audio Transcription with Groq")
