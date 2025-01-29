@@ -1,16 +1,6 @@
-import sys
-import site
 import streamlit as st
 import textwrap
-
-# Ensure correct Python environment
-sys.path.append(site.getsitepackages()[0])
-
-# Import Groq
-try:
-    import groq
-except ModuleNotFoundError:
-    st.error("The 'groq' package is missing! Please reinstall it in Streamlit Cloud.")
+from groq import Groq
 
 # Streamlit App Title
 st.title("Audio Transcription with Groq")
